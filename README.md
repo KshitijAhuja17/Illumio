@@ -17,27 +17,27 @@ This project was done by Kshitij Ahuja as part of his assessment with Illumio. T
 
 - 
 ## Approach
-The first aspect of the assessment was to map the destination port and protool number from the flow logs to its corresponding tag.
+1. The first aspect of the assessment was to map the destination port and protool number from the flow logs to its corresponding tag.
 
 For example,
 
  2 123456789012 eni-1a2b3c4d 10.0.1.102 172.217.7.228 1030 ___443 6___ 8 4000 1620140661 1620140721 ACCEPT OK 
 
-In this log, the destination port is 443 and the protocol number is 6. There are the only 2 fields needed for the mapping.
+2. In this log, the destination port is 443 and the protocol number is 6. There are the only 2 fields needed for the mapping.
 
-First, the protocol number is converted to its protocol name. In order to do that, I made a function named *make_protocolmapping(file):*. This first read the file - _protocol-numbers.csv_ and creates a dictionary that maps the protocol number to the protocol name.
+3. First, the protocol number is converted to its protocol name. In order to do that, I made a function named *make_protocolmapping(file):*. This first read the file - _protocol-numbers.csv_ and creates a dictionary that maps the protocol number to the protocol name.
 
-Then, using this dictionary, the protocol number from the logs is converted to its name. Once we have the destination port and protocol name, we can map it to the provided lookup table.
+4. Then, using this dictionary, the protocol number from the logs is converted to its name. Once we have the destination port and protocol name, we can map it to the provided lookup table.
 
-In order to use the lookup table, I made a function titled *make_lookup(file):*. This first reads the CSV storing the lookup, and then coverts it to a dictionary with the key being  (dstport, protocol) and value being the tag.
+5. In order to use the lookup table, I made a function titled *make_lookup(file):*. This first reads the CSV storing the lookup, and then coverts it to a dictionary with the key being  (dstport, protocol) and value being the tag.
 
-Using this lookup table, I can get the count of matching tags. I made a function titled - *count_tags(logs, lookup_table, protocol_mapping):* for this. For each log, it tries to find a matching key in the lookup table and increases the count of that pair by 1. It also accounts for non-matching tags and marks them as "Untagged".
+6. Using this lookup table, I can get the count of matching tags. I made a function titled - *count_tags(logs, lookup_table, protocol_mapping):* for this. For each log, it tries to find a matching key in the lookup table and increases the count of that pair by 1. It also accounts for non-matching tags and marks them as "Untagged".
 
-The same function also the count of each (dstport, protocol name) combination.
+7. The same function also the count of each (dstport, protocol name) combination.
 
-The next step is to write the tag count to a text file as output. The first required output is stored as *output1.txt* when the Python file is run.
+8. The next step is to write the tag count to a text file as output. The first required output is stored as *output1.txt* when the Python file is run.
 
-The Port,Protocol,Count is also written to a text file titled *output2.txt*.
+9. The Port,Protocol,Count is also written to a text file titled *output2.txt*.
 
 
 
