@@ -19,9 +19,9 @@ This project was done by Kshitij Ahuja as part of his assessment with Illumio. T
 ## Approach
 1. The first aspect of the assessment was to map the destination port and protool number from the flow logs to its corresponding tag.
 
-For example,
+    For example,
 
- 2 123456789012 eni-1a2b3c4d 10.0.1.102 172.217.7.228 1030 ___443 6___ 8 4000 1620140661 1620140721 ACCEPT OK 
+    2 123456789012 eni-1a2b3c4d 10.0.1.102 172.217.7.228 1030 ___443 6___ 8 4000 1620140661 1620140721 ACCEPT OK 
 
 2. In this log, the destination port is 443 and the protocol number is 6. There are the only 2 fields needed for the mapping.
 
